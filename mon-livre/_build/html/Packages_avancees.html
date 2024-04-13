@@ -1,0 +1,1722 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Maîtriser les outils scientifiques de Python : NumPy, Matplotlib, Numba, Scipy et SymPy. &#8212; cours python debutant</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Packages_avancees';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Les classes en Python" href="Les%20classes.html" />
+    <link rel="prev" title="Qu’est-ce qu’un package Python ?" href="Packages.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="cours python debutant - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="cours python debutant - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python%20de%20base.html">Apprendre Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Packages.html">Qu’est-ce qu’un package Python ? <a class="jp-toc-ignore"></a></a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Maîtriser les outils scientifiques de Python : NumPy, Matplotlib, Numba, Scipy et SymPy. <a class="jp-toc-ignore"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Les%20classes.html">Les classes en Python</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPackages_avancees.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Packages_avancees.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Maîtriser les outils scientifiques de Python : NumPy, Matplotlib, Numba, Scipy et SymPy. <a class="jp-toc-ignore"></a></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Maîtriser les outils scientifiques de Python : NumPy, Matplotlib, Numba, Scipy et SymPy. <a class="jp-toc-ignore"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-niveau-intermediaire">NumPy: Niveau Intermédiaire</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexation-et-decoupage-avances">Indexation et découpage avancés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions-universelles-ufuncs">Fonctions universelles (ufuncs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulation-de-formes">Manipulation de formes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions-d-agregation">Fonctions d’agrégation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-niveau-intermediaire">Matplotlib: Niveau Intermédiaire</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-et-axes">Figures et Axes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#personnalisation-de-l-apparence">Personnalisation de l’apparence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations-et-texte">Annotations et texte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphiques-3d">Graphiques 3D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphiques-personnalises">Graphiques personnalisés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcanimation">FuncAnimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#techniques-d-animation">Techniques d’animation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-de-funcanim">Applications de Funcanim</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numba-niveau-intermediaire">Numba : Niveau Intermédiaire</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-et-signatures-de-fonctions">Types et signatures de fonctions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation-conditionnelle">Compilation conditionnelle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acces-a-faible-niveau">Accès à faible niveau</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-techniques-avancees">Autres techniques avancées</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-niveau-avance">SciPy : Niveau Avancé</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-integrate-integration-numerique">scipy.integrate : Intégration Numérique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-optimize-optimisation">scipy.optimize : Optimisation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-signal-traitement-du-signal">scipy.signal : Traitement du signal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-interpolate-interpolation">scipy.interpolate : Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-modules">Autres modules</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy">SymPy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-a-sympy">Introduction à SymPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symboles-et-expressions">Symboles et expressions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-de-base">Opérations de base</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equations">Équations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcul-differentiel-et-integral">Calcul différentiel et intégral</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnalites-avancees">Fonctionnalités Avancées</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-et-vecteurs">Matrices et vecteurs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#systemes-d-equation">Systèmes d’équation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-et-limites">Séries et limites:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformees">Transformées</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-de-fonctions">Tracé de fonctions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcul-symbolique-vs-numerique-deux-approches-distinctes">Calcul Symbolique vs Numérique : Deux approches distinctes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcul-symbolique-la-precision-de-l-abstraction">Calcul Symbolique : La précision de l’abstraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcul-numerique-la-puissance-de-l-approximation">Calcul Numérique : La puissance de l’approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-choix-de-l-approche">Le choix de l’approche</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="maitriser-les-outils-scientifiques-de-python-numpy-matplotlib-numba-scipy-et-sympy">
+<h1>Maîtriser les outils scientifiques de Python : NumPy, Matplotlib, Numba, Scipy et SymPy. <a class="jp-toc-ignore"></a><a class="headerlink" href="#maitriser-les-outils-scientifiques-de-python-numpy-matplotlib-numba-scipy-et-sympy" title="Link to this heading">#</a></h1>
+<p>Ce Jupyter Notebook explore en profondeur cinq bibliothèques fondamentales pour le calcul scientifique, l’analyse de données et la visualisation en Python.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="numpy-niveau-intermediaire">
+<h1>NumPy: Niveau Intermédiaire<a class="headerlink" href="#numpy-niveau-intermediaire" title="Link to this heading">#</a></h1>
+<p>Cette sectionrs approfondit l’utilisation de NumPy, la bibliothèque fondamentale pour le calcul scientifique en Python. Nous explorerons des techniques plus avancées pour manipuler et analyser des données numériques.</p>
+<section id="indexation-et-decoupage-avances">
+<h2>Indexation et découpage avancés<a class="headerlink" href="#indexation-et-decoupage-avances" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Indexation booléenne:</strong> Sélectionner des éléments basés sur des conditions.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">indices_pairs</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="n">elements_pairs</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">indices_pairs</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">elements_pairs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2 4]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Masquage:</strong> Modifier des éléments spécifiques en utilisant des masques booléens.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="p">[</span><span class="n">arr</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 0 0]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Découpage avancé:</strong> Extraire des sous-ensembles de tableaux en utilisant des étapes et des indices négatifs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Inverser l&#39;ordre des éléments</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inverser l&#39;ordre des éléments&quot;</span><span class="p">,</span><span class="n">arr</span><span class="p">)</span>
+<span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># Extraire les éléments avec un pas de 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Extraire les éléments avec un pas de 2&quot;</span><span class="p">,</span> <span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inverser l&#39;ordre des éléments [1 2 3 0 0]
+Extraire les éléments avec un pas de 2 [1 2 3 0 0]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fonctions-universelles-ufuncs">
+<h2>Fonctions universelles (ufuncs)<a class="headerlink" href="#fonctions-universelles-ufuncs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Opérations mathématiques élément par élément sur des tableaux.</p></li>
+<li><p>Exemples: <code class="docutils literal notranslate"><span class="pre">np.sin</span></code>, <code class="docutils literal notranslate"><span class="pre">np.cos</span></code>, <code class="docutils literal notranslate"><span class="pre">np.sqrt</span></code>, <code class="docutils literal notranslate"><span class="pre">np.exp</span></code>, etc.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">sinus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sinus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.         0.70710678 1.        ]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="broadcasting">
+<h2>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Permet d’effectuer des opérations entre des tableaux de formes différentes en “étendant” automatiquement les dimensions.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">arr</span> <span class="o">+</span> <span class="mi">5</span> <span class="c1"># Ajoute 5 à chaque élément</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="manipulation-de-formes">
+<h2>Manipulation de formes<a class="headerlink" href="#manipulation-de-formes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">reshape</span></code>:</strong> Modifier la forme d’un tableau sans changer ses données.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># Transformer en une matrice 3x4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0  1  2  3  4  5  6  7  8  9 10 11]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ravel</span></code>:</strong> Aplatir un tableau en un vecteur à une dimension.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0  1  2  3  4  5  6  7  8  9 10 11]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">transpose</span></code>:</strong> Permuter les axes d’un tableau.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="o">.</span><span class="n">T</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0  1  2  3  4  5  6  7  8  9 10 11]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fonctions-d-agregation">
+<h2>Fonctions d’agrégation<a class="headerlink" href="#fonctions-d-agregation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Calculer des statistiques sur les éléments d’un tableau.</p></li>
+<li><p>Exemples: <code class="docutils literal notranslate"><span class="pre">np.sum</span></code>, <code class="docutils literal notranslate"><span class="pre">np.mean</span></code>, <code class="docutils literal notranslate"><span class="pre">np.std</span></code>, <code class="docutils literal notranslate"><span class="pre">np.min</span></code>, <code class="docutils literal notranslate"><span class="pre">np.max</span></code>, etc.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">moyenne</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;moyenne&quot;</span><span class="p">,</span> <span class="n">moyenne</span><span class="p">)</span>
+<span class="n">ecart_type</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;écart type&quot;</span><span class="p">,</span><span class="n">ecart_type</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>moyenne 3.0
+écart type 1.4142135623730951
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercices:</strong></p>
+<ol class="arabic simple">
+<li><p>Créez un tableau NumPy 2D de taille 4x4 rempli de nombres aléatoires entre 0 et 1.</p></li>
+<li><p>Extrayez la deuxième colonne du tableau.</p></li>
+<li><p>Calculez la somme de chaque ligne du tableau.</p></li>
+<li><p>Remplacez tous les éléments négatifs du tableau par 0.</p></li>
+<li><p>Aplatissez le tableau 2D en un vecteur à une dimension et calculez sa moyenne et son écart type.</p></li>
+</ol>
+<p><strong>Code de Départ:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># 1. Créer un tableau NumPy 2D de taille 4x4 rempli de nombres aléatoires entre 0 et 1</span>
+<span class="n">tableau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># 2. Extrayez la deuxième colonne du tableau.</span>
+<span class="c1"># ...</span>
+
+<span class="c1"># 3. Calculez la somme de chaque ligne du tableau.</span>
+<span class="c1"># ...</span>
+
+<span class="c1"># 4. Remplacez tous les éléments négatifs du tableau par 0.</span>
+<span class="c1"># ...</span>
+
+<span class="c1"># 5. Aplatissez le tableau 2D en un vecteur à une dimension et calculez sa moyenne et son écart type.</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>NumPy offre une large gamme de fonctionnalités pour le calcul scientifique. En maîtrisant ces techniques intermédiaires, vous serez en mesure de manipuler et d’analyser des données numériques avec efficacité et précision.</strong></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="matplotlib-niveau-intermediaire">
+<h1>Matplotlib: Niveau Intermédiaire<a class="headerlink" href="#matplotlib-niveau-intermediaire" title="Link to this heading">#</a></h1>
+<p>Cette section explore des fonctionnalités plus avancées de Matplotlib pour créer des visualisations de données complexes et personnalisées.</p>
+<section id="figures-et-axes">
+<h2>Figures et Axes<a class="headerlink" href="#figures-et-axes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> :</strong> Créer plusieurs sous-graphiques sur une même figure.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Grille 2x2 de sous-graphiques</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c46327668788047fe352416717439aaf62894a1b8b69f331cc53a37a12ec508b.png" src="_images/c46327668788047fe352416717439aaf62894a1b8b69f331cc53a37a12ec508b.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Contrôle précis des axes :</strong> Définir les limites, les étiquettes, les graduations, etc.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Axe X&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Axe Y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="personnalisation-de-l-apparence">
+<h2>Personnalisation de l’apparence<a class="headerlink" href="#personnalisation-de-l-apparence" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Couleurs et styles de ligne :</strong> Modifier les couleurs, les épaisseurs, les styles de trait, etc.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3d8e5eb7c872b1ee40df200835a1e19e0842ccb374c9cb8e32730ee61245750c.png" src="_images/3d8e5eb7c872b1ee40df200835a1e19e0842ccb374c9cb8e32730ee61245750c.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Marques :</strong> Ajouter des marqueurs aux points de données (cercles, carrés, etc.).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fbf711830a0&gt;
+</pre></div>
+</div>
+<img alt="_images/994f31560cf5b3e70739154ab48a443bfbf4530160ba58fd4b64bd8a11e92bcd.png" src="_images/994f31560cf5b3e70739154ab48a443bfbf4530160ba58fd4b64bd8a11e92bcd.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Légendes :</strong> Identifier les différentes séries de données sur le graphique.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">y1</span> <span class="o">=</span> <span class="n">y</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sin(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;cos(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbf70feb4f0&gt;
+</pre></div>
+</div>
+<img alt="_images/ffc576383208fa429c5d5d95468cc5b04e4c945a194a682438c3216f70d71516.png" src="_images/ffc576383208fa429c5d5d95468cc5b04e4c945a194a682438c3216f70d71516.png" />
+</div>
+</div>
+</section>
+<section id="annotations-et-texte">
+<h2>Annotations et texte<a class="headerlink" href="#annotations-et-texte" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">plt.annotate()</span></code> :</strong> Ajouter du texte explicatif à des points spécifiques du graphique.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Point important&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(1.3173325912716962, 1.312033445698487, &#39;Point important&#39;)
+</pre></div>
+</div>
+<img alt="_images/255660625b52016f5e52321420764bead47b39ba9bcb2b096854a913a38e52c9.png" src="_images/255660625b52016f5e52321420764bead47b39ba9bcb2b096854a913a38e52c9.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">plt.text()</span></code> :</strong> Ajouter du texte à des positions arbitraires sur le graphique.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Information supplémentaire&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6e8825483caf419df98923ae8099d74cf5ea149a621031f613c940068a24b2eb.png" src="_images/6e8825483caf419df98923ae8099d74cf5ea149a621031f613c940068a24b2eb.png" />
+</div>
+</div>
+</section>
+<section id="graphiques-3d">
+<h2>Graphiques 3D<a class="headerlink" href="#graphiques-3d" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Axes3D</span></code> :</strong> Créer des graphiques tridimensionnels.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">axes3d</span><span class="o">.</span><span class="n">get_test_data</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="c1"># Tracer la surface en 3D</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;royalblue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Tracer les projections des contours pour chaque dimension. En choisissant des décalages</span>
+<span class="c1"># qui correspondent aux limites des axes appropriées, les contours projetés se placeront sur</span>
+<span class="c1"># les &#39;murs&#39; du graphique</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">zdir</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">zdir</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=-</span><span class="mi">40</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">zdir</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">zlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+       <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">zlabel</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(-40.0, 40.0),
+ (-40.0, 40.0),
+ (-100.0, 100.0),
+ Text(0.5, 0, &#39;X&#39;),
+ Text(0.5, 0.5, &#39;Y&#39;),
+ Text(0.5, 0, &#39;Z&#39;)]
+</pre></div>
+</div>
+<img alt="_images/388cfb4fbce7d2169df6f9234b25130f3aa1febf5436813231f33fda255c3cc1.png" src="_images/388cfb4fbce7d2169df6f9234b25130f3aa1febf5436813231f33fda255c3cc1.png" />
+</div>
+</div>
+</section>
+<section id="graphiques-personnalises">
+<h2>Graphiques personnalisés<a class="headerlink" href="#graphiques-personnalises" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">plt.barh()</span></code> :</strong> Graphiques à barres horizontales.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">plt.boxplot()</span></code> :</strong> Diagrammes en boîte pour visualiser la distribution des données.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">plt.violinplot()</span></code> :</strong> Diagrammes en violon pour visualiser la densité des données.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> :</strong> Histogrammes pour visualiser la distribution des fréquences.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">plt.imshow()</span></code> :</strong> Afficher des images.</p></li>
+</ul>
+</section>
+<section id="funcanimation">
+<h2>FuncAnimation<a class="headerlink" href="#funcanimation" title="Link to this heading">#</a></h2>
+<p><strong>Funcanim</strong> est un module de Matplotlib qui permet de créer des animations à partir de graphiques. Il offre un contrôle précis sur chaque image de l’animation, permettant de visualiser des processus dynamiques et des changements au fil du temps.</p>
+<p>** Fonction <code class="docutils literal notranslate"><span class="pre">FuncAnimation</span></code>**</p>
+<ul class="simple">
+<li><p>La fonction principale pour créer des animations.</p></li>
+<li><p>Prend en arguments :</p></li>
+<li><p>La figure (<code class="docutils literal notranslate"><span class="pre">fig</span></code>) sur laquelle l’animation sera dessinée.</p></li>
+<li><p>Une fonction (<code class="docutils literal notranslate"><span class="pre">func</span></code>) qui met à jour le graphique à chaque image.</p></li>
+<li><p>Les images (<code class="docutils literal notranslate"><span class="pre">frames</span></code>) qui définissent les données ou les paramètres pour chaque image.</p></li>
+<li><p>L’intervalle (<code class="docutils literal notranslate"><span class="pre">interval</span></code>) entre les images en millisecondes.</p></li>
+</ul>
+<p><strong>Exemple de base:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> ipympl
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[])</span>  <span class="c1"># Ajout d&#39;une couleur pour meilleure visibilité</span>
+
+<span class="c1"># Définir les limites des axes</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">init</span><span class="p">():</span>  <span class="c1"># Fonction d&#39;initialisation pour établir le fond de l&#39;animation</span>
+    <span class="n">line</span><span class="o">.</span><span class="n">set_data</span><span class="p">([],</span> <span class="p">[])</span>
+    <span class="k">return</span> <span class="n">line</span><span class="p">,</span>
+
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+    <span class="n">xdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+    <span class="n">ydata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">frame</span><span class="p">))</span>
+    <span class="n">line</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">line</span><span class="p">,</span>
+
+<span class="c1"># Créer l&#39;animation</span>
+<span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+                    <span class="n">init_func</span><span class="o">=</span><span class="n">init</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">repeat</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># Interval ajusté pour une visualisation plus claire</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;ipympl&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2480,</span> in <span class="ni">InteractiveShell.run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2478</span>     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2479</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2480</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2482</span> <span class="c1"># The code below prevents the output from being displayed</span>
+<span class="g g-Whitespace">   </span><span class="mi">2483</span> <span class="c1"># when using magics with decorator @output_can_be_silenced</span>
+<span class="g g-Whitespace">   </span><span class="mi">2484</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2485</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/IPython/core/magics/pylab.py:99,</span> in <span class="ni">PylabMagics.matplotlib</span><span class="nt">(self, line)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available matplotlib backends: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">backends_list</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">99</span>     <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">enable_matplotlib</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_show_matplotlib_backend</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3670,</span> in <span class="ni">InteractiveShell.enable_matplotlib</span><span class="nt">(self, gui)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3666</span>         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: Cannot change to a different GUI toolkit: </span><span class="si">%s</span><span class="s1">.&#39;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3667</span>                 <span class="s1">&#39; Using </span><span class="si">%s</span><span class="s1"> instead.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gui</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pylab_gui_select</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">3668</span>         <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">find_gui_and_backend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pylab_gui_select</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3670</span> <span class="n">pt</span><span class="o">.</span><span class="n">activate_matplotlib</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3672</span> <span class="kn">from</span> <span class="nn">matplotlib_inline.backend_inline</span> <span class="kn">import</span> <span class="n">configure_inline_support</span>
+<span class="g g-Whitespace">   </span><span class="mi">3674</span> <span class="n">configure_inline_support</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/IPython/core/pylabtools.py:368,</span> in <span class="ni">activate_matplotlib</span><span class="nt">(backend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">363</span> <span class="c1"># Due to circular imports, pyplot may be only partially initialised</span>
+<span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="c1"># when this function runs.</span>
+<span class="g g-Whitespace">    </span><span class="mi">365</span> <span class="c1"># So avoid needing matplotlib attribute-lookup to access pyplot.</span>
+<span class="g g-Whitespace">    </span><span class="mi">366</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="ne">--&gt; </span><span class="mi">368</span> <span class="n">plt</span><span class="o">.</span><span class="n">switch_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">_needmain</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span> <span class="c1"># We need to detect at runtime whether show() is called by the user.</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span> <span class="c1"># For this, we wrap it into a decorator which adds a &#39;called&#39; flag.</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/matplotlib/pyplot.py:342,</span> in <span class="ni">switch_backend</span><span class="nt">(newbackend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">339</span> <span class="c1"># have to escape the switch on access logic</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span> <span class="n">old_backend</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">rcParams</span><span class="p">,</span> <span class="s1">&#39;backend&#39;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">342</span> <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">cbook</span><span class="o">.</span><span class="n">_backend_module_name</span><span class="p">(</span><span class="n">newbackend</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span> <span class="n">canvas_class</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">FigureCanvas</span>
+<span class="g g-Whitespace">    </span><span class="mi">345</span> <span class="n">required_framework</span> <span class="o">=</span> <span class="n">canvas_class</span><span class="o">.</span><span class="n">required_interactive_framework</span>
+
+<span class="nn">File /usr/local/python/3.10.13/lib/python3.10/importlib/__init__.py:126,</span> in <span class="ni">import_module</span><span class="nt">(name, package)</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>             <span class="k">break</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>         <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="ne">--&gt; </span><span class="mi">126</span> <span class="k">return</span> <span class="n">_bootstrap</span><span class="o">.</span><span class="n">_gcd_import</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">level</span><span class="p">:],</span> <span class="n">package</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1050,</span> in <span class="ni">_gcd_import</span><span class="nt">(name, package, level)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1027,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:992,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:241,</span> in <span class="ni">_call_with_frames_removed</span><span class="nt">(f, *args, **kwds)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1050,</span> in <span class="ni">_gcd_import</span><span class="nt">(name, package, level)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1027,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1004,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ipympl&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cet exemple crée une animation d’un point se déplaçant le long d’une sinusoïde. La fonction <code class="docutils literal notranslate"><span class="pre">update</span></code> est appelée à chaque image pour mettre à jour les données du graphique.</p>
+<section id="techniques-d-animation">
+<h3>Techniques d’animation<a class="headerlink" href="#techniques-d-animation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Mise à jour des données:</strong> Modifier les valeurs des données à chaque image pour visualiser des changements au fil du temps.</p></li>
+<li><p><strong>Modification des propriétés des artistes:</strong> Changer les couleurs, les tailles, les positions des éléments du graphique.</p></li>
+<li><p><strong>Ajout et suppression d’artistes:</strong> Faire apparaître ou disparaître des éléments pour visualiser des processus dynamiques.</p></li>
+</ul>
+</section>
+<section id="applications-de-funcanim">
+<h3>Applications de Funcanim<a class="headerlink" href="#applications-de-funcanim" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Visualisation de simulations scientifiques.</p></li>
+<li><p>Animation de séries temporelles.</p></li>
+<li><p>Création de visualisations interactives.</p></li>
+<li><p>Exploration de l’espace des paramètres.</p></li>
+</ul>
+<p><strong>Funcanim est un outil puissant pour créer des visualisations dynamiques et interactives avec Matplotlib. En utilisant des techniques d’animation, vous pouvez donner vie à vos données et mieux comprendre les processus sous-jacents.</strong></p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="numba-niveau-intermediaire">
+<h1>Numba : Niveau Intermédiaire<a class="headerlink" href="#numba-niveau-intermediaire" title="Link to this heading">#</a></h1>
+<p>Cette section explore les fonctionnalités avancées de Numba pour optimiser encore davantage le code Python numérique et exploiter les capacités de calcul parallèle.</p>
+<section id="types-et-signatures-de-fonctions">
+<h2>Types et signatures de fonctions<a class="headerlink" href="#types-et-signatures-de-fonctions" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Annotations de types:</strong> Déclarer explicitement les types des arguments et des valeurs de retour pour améliorer l’efficacité de la compilation.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">int32</span><span class="p">,</span> <span class="n">float64</span><span class="p">,</span> <span class="n">njit</span><span class="p">,</span> <span class="n">prange</span>
+
+
+<span class="nd">@njit</span><span class="p">(</span><span class="n">int32</span><span class="p">(</span><span class="n">int32</span><span class="p">,</span> <span class="n">int32</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">somme</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Signatures de fonctions:</strong> Spécifier différentes implémentations pour différents types d’arguments.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">calcul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">int32</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">int32</span><span class="p">):</span>
+        <span class="c1"># Implémentation pour des entiers</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">float64</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">float64</span><span class="p">):</span>
+        <span class="c1"># Implémentation pour des nombres à virgule flottante</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="compilation-conditionnelle">
+<h2>Compilation conditionnelle<a class="headerlink" href="#compilation-conditionnelle" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;njit(if_true=...,</span> <span class="pre">if_false=...)</span></code>:</strong> Compiler différentes versions d’une fonction en fonction d’une condition.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">if_true</span><span class="o">=</span><span class="n">njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">calcul_parallele</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">resultat</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">resultat</span> <span class="o">+=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">resultat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;generated_jit(nopython=True)</span></code>:</strong> Générer dynamiquement le code de la fonction en fonction des types d’arguments.</p></li>
+</ul>
+</section>
+<section id="acces-a-faible-niveau">
+<h2>Accès à faible niveau<a class="headerlink" href="#acces-a-faible-niveau" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cffi</span></code> et <code class="docutils literal notranslate"><span class="pre">ctypes</span></code>:</strong> Interagir avec des bibliothèques C externes pour des performances optimales.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cffi</span> <span class="kn">import</span> <span class="n">FFI</span>
+
+<span class="n">ffi</span> <span class="o">=</span> <span class="n">FFI</span><span class="p">()</span>
+<span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;double sin(double x);&quot;</span><span class="p">)</span>
+<span class="n">libm</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">dlopen</span><span class="p">(</span><span class="s2">&quot;libm.so.6&quot;</span><span class="p">)</span>
+
+<span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">sinus_c</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">libm</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Extensions C/C++:</strong> Écrire des extensions en C/C++ pour des fonctionnalités non prises en charge par Numba.</p></li>
+</ul>
+</section>
+<section id="autres-techniques-avancees">
+<h2>Autres techniques avancées<a class="headerlink" href="#autres-techniques-avancees" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Fusion de boucles:</strong> Combiner plusieurs boucles en une seule pour améliorer les performances.</p></li>
+<li><p><strong>Vectorisation automatique:</strong> Utiliser les instructions SIMD du processeur pour accélérer les opérations sur les tableaux.</p></li>
+<li><p><strong>Utilisation de la mémoire partagée:</strong> Partager des données entre les threads dans les calculs parallèles.</p></li>
+<li><p><strong>Utilisation de la mémoire GPU:</strong> Accélérer les calculs en utilisant la puissance de traitement des cartes graphiques.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="scipy-niveau-avance">
+<h1>SciPy : Niveau Avancé<a class="headerlink" href="#scipy-niveau-avance" title="Link to this heading">#</a></h1>
+<p>SciPy est une bibliothèque scientifique étendue en Python, construite sur NumPy, qui offre des modules pour divers domaines scientifiques et techniques. Ce cours explore des fonctionnalités avancées de quelques modules clés de SciPy.</p>
+<section id="scipy-integrate-integration-numerique">
+<h2>scipy.integrate : Intégration Numérique<a class="headerlink" href="#scipy-integrate-integration-numerique" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">quad</span></code> :</strong> Calcule l’intégrale définie d’une fonction univariée.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">dblquad</span></code>, <code class="docutils literal notranslate"><span class="pre">tplquad</span></code> :</strong> Intégrales doubles et triples.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">odeint</span></code> :</strong> Résout des équations différentielles ordinaires.</p></li>
+<li><p><strong>Méthodes avancées:</strong></p>
+<ul>
+<li><p>Choix de l’algorithme d’intégration (par exemple, <code class="docutils literal notranslate"><span class="pre">quadrature</span></code>, <code class="docutils literal notranslate"><span class="pre">romberg</span></code>, etc.)</p></li>
+<li><p>Gestion des singularités et des points problématiques.</p></li>
+</ul>
+</li>
+</ul>
+<p><em><strong>Exemple de base:</strong></em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="k">as</span> <span class="nn">integrate</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">resultat</span><span class="p">,</span> <span class="n">erreur</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intégrale de x^2 de 0 à 1: </span><span class="si">{</span><span class="n">resultat</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
+
+<span class="n">resultat</span><span class="p">,</span> <span class="n">erreur</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">dblquad</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intégrale double de x*y sur [0,1]x[0,1]: </span><span class="si">{</span><span class="n">resultat</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intégrale de x^2 de 0 à 1: 0.3333
+Intégrale double de x*y sur [0,1]x[0,1]: 0.2500
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="scipy-optimize-optimisation">
+<h2>scipy.optimize : Optimisation<a class="headerlink" href="#scipy-optimize-optimisation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">minimize</span></code> :</strong> Trouve le minimum d’une fonction scalaire.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">minimize_scalar</span></code> :</strong> Minimisation univariée.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">root_scalar</span></code> :</strong> Trouve la racine d’une fonction scalaire.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">fsolve</span></code> :</strong> Résout un système d’équations non linéaires.</p></li>
+<li><p><strong>Méthodes avancé    es:</strong></p></li>
+<li><p>Choix de l’algorithme d’optimisation (par exemple, <code class="docutils literal notranslate"><span class="pre">BFGS</span></code>, <code class="docutils literal notranslate"><span class="pre">Nelder-Mead</span></code>,     etc.)</p></li>
+<li><p>Contraintes d’optimi    sation.</p></li>
+<li><p>Optimisation globale vs</p></li>
+</ul>
+<p><em><strong>Exemple de base:</strong></em>. locale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">optimize</span>
+
+<span class="k">def</span> <span class="nf">rosen</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="mf">100.0</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">-</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mf">2.0</span><span class="p">)</span><span class="o">**</span><span class="mf">2.0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="n">resultat</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">rosen</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Minimum de la fonction de Rosenbrock: </span><span class="si">{</span><span class="n">resultat</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">root_scalar</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Racine de x^2 - 2: </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum de la fonction de Rosenbrock: [0.99999925 0.99999852 0.99999706 0.99999416 0.99998833]
+Racine de x^2 - 2: 1.4142135623731364
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="scipy-signal-traitement-du-signal">
+<h2>scipy.signal : Traitement du signal<a class="headerlink" href="#scipy-signal-traitement-du-signal" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Filtrage :</strong> <code class="docutils literal notranslate"><span class="pre">lfilter</span></code>, <code class="docutils literal notranslate"><span class="pre">filtfilt</span></code>, etc. pour appliquer des filtres numériques aux signaux.</p></li>
+<li><p><strong>Transformée de Fourier :</strong> <code class="docutils literal notranslate"><span class="pre">fft</span></code>, <code class="docutils literal notranslate"><span class="pre">ifft</span></code>, etc. pour l’analyse fréquentielle des signaux.</p></li>
+<li><p><strong>Convolution et corrélation :</strong> <code class="docutils literal notranslate"><span class="pre">convolve</span></code>, <code class="docutils literal notranslate"><span class="pre">correlate</span></code> pour analyser les relations entre les signaux.</p></li>
+<li><p><strong>Fenêtrage :</strong> <code class="docutils literal notranslate"><span class="pre">hamming</span></code>, <code class="docutils literal notranslate"><span class="pre">hanning</span></code>, etc. pour réduire les fuites spectrales dans l’analyse fréquentielle.</p></li>
+<li><p><strong>Méthodes avancé    es:</strong></p></li>
+<li><p>Conception de filtres numér    iques.</p></li>
+<li><p>Analyse temps-fréquence (wavelets, spectrog</p></li>
+</ul>
+<p>***Exemple de base:***rammes).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">signal</span>
+<span class="n">signal_bruite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Exemple de signal bruité</span>
+
+<span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">butter</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># Filtre passe-bas Butterworth d&#39;ordre 4</span>
+<span class="n">signal_filtre</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">lfilter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">signal_bruite</span><span class="p">)</span>  <span class="c1"># Application du filtre</span>
+
+<span class="n">frequences</span><span class="p">,</span> <span class="n">spectre_puissance</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">periodogram</span><span class="p">(</span><span class="n">signal_filtre</span><span class="p">)</span>  <span class="c1"># Utilisation du signal filtré</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">frequences</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">frequences</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">spectre_puissance</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">spectre_puissance</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frequences</span><span class="p">,</span> <span class="n">spectre_puissance</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fréquence&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Puissance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Spectre de puissance du signal filtré&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2d62feb2205aca284708b281a6ca7caa67fb17d9c999ef434486a14c91d72ae3.png" src="_images/2d62feb2205aca284708b281a6ca7caa67fb17d9c999ef434486a14c91d72ae3.png" />
+</div>
+</div>
+</section>
+<section id="scipy-interpolate-interpolation">
+<h2>scipy.interpolate : Interpolation<a class="headerlink" href="#scipy-interpolate-interpolation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">interp1d</span></code> :</strong> Interpolation linéaire, polynomiale, spline, etc.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">UnivariateSpline</span></code>, <code class="docutils literal notranslate"><span class="pre">InterpolatedUnivariateSpline</span></code> :</strong> Spline d’interpolation avec un contrôle précis.</p></li>
+<li><p><strong>Interpolation multivariée :</strong> <code class="docutils literal notranslate"><span class="pre">griddata</span></code>, <code class="docutils literal notranslate"><span class="pre">Rbf</span></code> pour interpoler des données sur des grilles multidimensionnelles.</p></li>
+</ul>
+<p><em><strong>Exemple de base:</strong></em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">scipy.interpolate</span> <span class="k">as</span> <span class="nn">interpolate</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">9.0</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">x_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">41</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y_new</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">x_new</span><span class="p">,</span> <span class="n">y_new</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/13cd7a0100805445219f903eed8984ec684b290895f9d98ec82378698520eab8.png" src="_images/13cd7a0100805445219f903eed8984ec684b290895f9d98ec82378698520eab8.png" />
+</div>
+</div>
+</section>
+<section id="autres-modules">
+<h2>Autres modules<a class="headerlink" href="#autres-modules" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> :</strong> Statistiques et probabilités.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> :</strong> Matrices creuses.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">scipy.spatial</span></code> :</strong> Algorithmes géométriques et de recherche de voisins les plus proches.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">scipy.ndimage</span></code> :</strong> Traitement d’images N-dimensionnelles.</p></li>
+</ul>
+<p><em><strong>Exemple de base:</strong></em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Moyenne: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">, Écart type: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">normaltest</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># Test de normalité</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Moyenne: -0.010044523410215342, Écart type: 0.9936412447302619
+NormaltestResult(statistic=0.8863616681045153, pvalue=0.6419911027376801)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="sympy">
+<h1>SymPy<a class="headerlink" href="#sympy" title="Link to this heading">#</a></h1>
+<p>SymPy est une bibliothèque Python puissante pour le calcul symbolique, permettant de manipuler des expressions mathématiques de manière symbolique plutôt que numérique. Cela signifie que vous pouvez travailler avec des variables, des équations, des fonctions, etc., sans avoir besoin de valeurs numériques spécifiques.</p>
+<section id="introduction-a-sympy">
+<h2>Introduction à SymPy<a class="headerlink" href="#introduction-a-sympy" title="Link to this heading">#</a></h2>
+<section id="symboles-et-expressions">
+<h3>Symboles et expressions<a class="headerlink" href="#symboles-et-expressions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Créer des symboles : <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">sp.Symbol('x')</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">sp.Symbol('y')</span></code></p></li>
+<li><p>Définir des expressions : <code class="docutils literal notranslate"><span class="pre">expr</span> <span class="pre">=</span> <span class="pre">x**2</span> <span class="pre">+</span> <span class="pre">y</span></code></p></li>
+<li><p>Afficher joliment : <code class="docutils literal notranslate"><span class="pre">sp.pprint(expr)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 2    
+x  + y
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="operations-de-base">
+<h3>Opérations de base<a class="headerlink" href="#operations-de-base" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Simplification : <code class="docutils literal notranslate"><span class="pre">sp.simplify(expr)</span></code></p></li>
+<li><p>Factorisation : <code class="docutils literal notranslate"><span class="pre">sp.factor(expr)</span></code></p></li>
+<li><p>Développement : <code class="docutils literal notranslate"><span class="pre">sp.expand(expr)</span></code></p></li>
+<li><p>Substitution : <code class="docutils literal notranslate"><span class="pre">expr.subs(x,</span> <span class="pre">2)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simplified_expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">simplified_expr</span><span class="p">)</span>  <span class="c1"># Affiche (x - 1)**2</span>
+
+<span class="n">factored_expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">factored_expr</span><span class="p">)</span>    <span class="c1"># Affiche (x - 1)*(x + 1)</span>
+
+<span class="n">expanded_expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">expanded_expr</span><span class="p">)</span>    <span class="c1"># Affiche x**3 + 3*x**2 + 3*x + 1</span>
+
+<span class="n">substituted_expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">substituted_expr</span><span class="p">)</span> <span class="c1"># Affiche 4 + y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 2          
+x  - 2⋅x + 1
+(x - 1)⋅(x + 1)
+ 3      2          
+x  + 3⋅x  + 3⋅x + 1
+y + 4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="equations">
+<h3>Équations<a class="headerlink" href="#equations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Créer des équations : <code class="docutils literal notranslate"><span class="pre">eq</span> <span class="pre">=</span> <span class="pre">sp.Eq(x**2</span> <span class="pre">-</span> <span class="pre">1,</span> <span class="pre">0)</span></code></p></li>
+<li><p>Résoudre des équations : <code class="docutils literal notranslate"><span class="pre">sp.solve(eq,</span> <span class="pre">x)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">solutions</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solutions</span><span class="p">)</span>  <span class="c1"># Affiche [-1, 1]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1, 1]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calcul-differentiel-et-integral">
+<h3>Calcul différentiel et intégral<a class="headerlink" href="#calcul-differentiel-et-integral" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Dérivées : <code class="docutils literal notranslate"><span class="pre">sp.diff(expr,</span> <span class="pre">x)</span></code></p></li>
+<li><p>Intégrales : <code class="docutils literal notranslate"><span class="pre">sp.integrate(expr,</span> <span class="pre">x)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">derivee</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">derivee</span><span class="p">)</span>   <span class="c1"># Affiche cos(x)</span>
+
+<span class="n">integrale</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">integrale</span><span class="p">)</span> <span class="c1"># Affiche -cos(x)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cos(x)
+-cos(x)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fonctionnalites-avancees">
+<h2>Fonctionnalités Avancées<a class="headerlink" href="#fonctionnalites-avancees" title="Link to this heading">#</a></h2>
+<section id="matrices-et-vecteurs">
+<h3>Matrices et vecteurs<a class="headerlink" href="#matrices-et-vecteurs" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Créer des matrices et vecteurs symboliques : <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">sp.Matrix([[1,</span> <span class="pre">x],</span> <span class="pre">[y,</span> <span class="pre">2]])</span></code></p></li>
+<li><p>Opérations matricielles : <code class="docutils literal notranslate"><span class="pre">M.det()</span></code>, <code class="docutils literal notranslate"><span class="pre">M.inv()</span></code>, etc.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">determinant</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+<span class="n">inverse</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">inv</span><span class="p">()</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">determinant</span><span class="p">)</span>  
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">inverse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-x⋅y + 2
+⎡   2        -x    ⎤
+⎢────────  ────────⎥
+⎢-x⋅y + 2  -x⋅y + 2⎥
+⎢                  ⎥
+⎢  -y         1    ⎥
+⎢────────  ────────⎥
+⎣-x⋅y + 2  -x⋅y + 2⎦
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="systemes-d-equation">
+<h3>Systèmes d’équation<a class="headerlink" href="#systemes-d-equation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Résoudre des systèmes d’équations linéaires : <code class="docutils literal notranslate"><span class="pre">sp.linsolve([eq1,</span> <span class="pre">eq2],</span> <span class="pre">[x,</span> <span class="pre">y])</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">eq2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">solutions</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linsolve</span><span class="p">([</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solutions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(2, 1)}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="series-et-limites">
+<h3>Séries et limites:<a class="headerlink" href="#series-et-limites" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Développer des fonctions en séries de Taylor : <code class="docutils literal notranslate"><span class="pre">sp.series(sp.sin(x),</span> <span class="pre">x,</span> <span class="pre">0,</span> <span class="pre">10)</span></code></p></li>
+<li><p>Calculer des limites : <code class="docutils literal notranslate"><span class="pre">sp.limit(sp.sin(x)/x,</span> <span class="pre">x,</span> <span class="pre">0)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series_expansion</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">series_expansion</span><span class="p">)</span>
+
+<span class="n">limite</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">limite</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     3     5     7       9           
+    x     x     x       x       ⎛ 10⎞
+x - ── + ─── - ──── + ────── + O⎝x  ⎠
+    6    120   5040   362880         
+1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="transformees">
+<h3>Transformées<a class="headerlink" href="#transformees" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Transformées de Laplace et de Fourier : <code class="docutils literal notranslate"><span class="pre">sp.laplace_transform(f,</span> <span class="pre">t,</span> <span class="pre">s)</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.fourier_transform(f,</span> <span class="pre">x,</span> <span class="pre">k)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t s&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">laplace_transform</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">laplace_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">laplace_transform</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>⎛     2                 ⎞
+⎜    s                  ⎟
+⎜    ──                 ⎟
+⎜    4      ⎛s⎞         ⎟
+⎜√π⋅ℯ  ⋅erfc⎜─⎟         ⎟
+⎜           ⎝2⎠         ⎟
+⎜──────────────, 0, True⎟
+⎝      2                ⎠
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="trace-de-fonctions">
+<h3>Tracé de fonctions<a class="headerlink" href="#trace-de-fonctions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Visualiser des expressions symboliques : <code class="docutils literal notranslate"><span class="pre">sp.plot(expr,</span> <span class="pre">(x,</span> <span class="pre">-5,</span> <span class="pre">5))</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bef02e1e3dd6f29137c7e08c2a07c6e749a2483dc4c772362938638cf92690ba.png" src="_images/bef02e1e3dd6f29137c7e08c2a07c6e749a2483dc4c772362938638cf92690ba.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f7e500d6850&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="calcul-symbolique-vs-numerique-deux-approches-distinctes">
+<h2>Calcul Symbolique vs Numérique : Deux approches distinctes<a class="headerlink" href="#calcul-symbolique-vs-numerique-deux-approches-distinctes" title="Link to this heading">#</a></h2>
+<p>Le monde des mathématiques utilise deux approches fondamentales pour manipuler et analyser les expressions : le calcul symbolique et le calcul numérique. Chacun a ses forces et ses faiblesses, et le choix de la meilleure approche dépend du problème à résoudre.</p>
+<section id="calcul-symbolique-la-precision-de-l-abstraction">
+<h3>Calcul Symbolique : La précision de l’abstraction<a class="headerlink" href="#calcul-symbolique-la-precision-de-l-abstraction" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Manipulation de symboles:</strong> Au lieu de travailler avec des valeurs numériques spécifiques, le calcul symbolique utilise des symboles (comme <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>) pour représenter des variables et des quantités inconnues.</p></li>
+<li><p><strong>Solutions exactes:</strong> Il se concentre sur la manipulation de ces symboles selon les règles mathématiques pour obtenir des solutions exactes et analytiques, sans approximations ni erreurs d’arrondi.</p></li>
+<li><p><strong>Exemples d’applications:</strong></p>
+<ul>
+<li><p><strong>Dérivation et intégration symbolique:</strong> Trouver la dérivée ou l’intégrale d’une fonction sous forme symbolique, sans avoir à calculer des valeurs numériques.</p></li>
+<li><p><strong>Résolution d’équations:</strong> Trouver des solutions exactes à des équations algébriques ou différentielles.</p></li>
+<li><p><strong>Simplification d’expressions:</strong> Manipuler des expressions complexes pour les rendre plus simples et plus faciles à comprendre.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="calcul-numerique-la-puissance-de-l-approximation">
+<h3>Calcul Numérique : La puissance de l’approximation<a class="headerlink" href="#calcul-numerique-la-puissance-de-l-approximation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Valeurs numériques:</strong> Le calcul numérique traite des valeurs numériques spécifiques. Il utilise des algorithmes et des méthodes numériques pour obtenir des approximations des solutions.</p></li>
+<li><p><strong>Précision limitée:</strong> En raison des limitations de la représentation des nombres en machine et des erreurs d’arrondi, les résultats du calcul numérique ne sont pas toujours exacts.</p></li>
+<li><p><strong>Exemples d’applications:</strong></p>
+<ul>
+<li><p><strong>Simulation et modélisation:</strong> Utiliser des modèles mathématiques pour simuler des systèmes complexes et prédire leur comportement.</p></li>
+<li><p><strong>Optimisation:</strong> Trouver les valeurs des paramètres qui minimisent ou maximisent une fonction.</p></li>
+<li><p><strong>Apprentissage automatique:</strong> Entraîner des modèles d’apprentissage automatique sur des données numériques pour faire des prédictions.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="le-choix-de-l-approche">
+<h3>Le choix de l’approche<a class="headerlink" href="#le-choix-de-l-approche" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Précision vs. efficacité:</strong> Le calcul symbolique offre une précision absolue, mais peut être plus lent pour les problèmes complexes. Le calcul numérique est généralement plus rapide, mais au prix d’une précision limitée.</p></li>
+<li><p><strong>Nature du problème:</strong> Si vous avez besoin d’une solution exacte ou si vous manipulez des expressions symboliques, le calcul symbolique est préférable. Si vous travaillez avec des données numériques et que vous pouvez tolérer une certaine approximation, le calcul numérique est plus adapté.</p></li>
+</ul>
+<p><strong>En résumé, le calcul symbolique et le calcul numérique sont complémentaires. En comprenant leurs forces et leurs faiblesses, vous pouvez choisir la meilleure approche pour résoudre vos problèmes mathématiques et scientifiques.</strong></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Packages.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Qu’est-ce qu’un package Python ? <a class="jp-toc-ignore"></a></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Les%20classes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Les classes en Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Maîtriser les outils scientifiques de Python : NumPy, Matplotlib, Numba, Scipy et SymPy. <a class="jp-toc-ignore"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-niveau-intermediaire">NumPy: Niveau Intermédiaire</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexation-et-decoupage-avances">Indexation et découpage avancés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions-universelles-ufuncs">Fonctions universelles (ufuncs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulation-de-formes">Manipulation de formes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions-d-agregation">Fonctions d’agrégation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-niveau-intermediaire">Matplotlib: Niveau Intermédiaire</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-et-axes">Figures et Axes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#personnalisation-de-l-apparence">Personnalisation de l’apparence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations-et-texte">Annotations et texte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphiques-3d">Graphiques 3D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphiques-personnalises">Graphiques personnalisés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcanimation">FuncAnimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#techniques-d-animation">Techniques d’animation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-de-funcanim">Applications de Funcanim</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numba-niveau-intermediaire">Numba : Niveau Intermédiaire</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-et-signatures-de-fonctions">Types et signatures de fonctions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation-conditionnelle">Compilation conditionnelle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acces-a-faible-niveau">Accès à faible niveau</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-techniques-avancees">Autres techniques avancées</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-niveau-avance">SciPy : Niveau Avancé</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-integrate-integration-numerique">scipy.integrate : Intégration Numérique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-optimize-optimisation">scipy.optimize : Optimisation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-signal-traitement-du-signal">scipy.signal : Traitement du signal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy-interpolate-interpolation">scipy.interpolate : Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-modules">Autres modules</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy">SymPy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-a-sympy">Introduction à SymPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symboles-et-expressions">Symboles et expressions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-de-base">Opérations de base</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equations">Équations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcul-differentiel-et-integral">Calcul différentiel et intégral</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnalites-avancees">Fonctionnalités Avancées</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-et-vecteurs">Matrices et vecteurs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#systemes-d-equation">Systèmes d’équation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-et-limites">Séries et limites:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformees">Transformées</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-de-fonctions">Tracé de fonctions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcul-symbolique-vs-numerique-deux-approches-distinctes">Calcul Symbolique vs Numérique : Deux approches distinctes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcul-symbolique-la-precision-de-l-abstraction">Calcul Symbolique : La précision de l’abstraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcul-numerique-la-puissance-de-l-approximation">Calcul Numérique : La puissance de l’approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-choix-de-l-approche">Le choix de l’approche</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

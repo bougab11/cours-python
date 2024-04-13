@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Apprendre Python &#8212; cours python debutant</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python de base';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Qu’est-ce qu’un package Python ?" href="Packages.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="cours python debutant - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="cours python debutant - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Apprendre Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Packages.html">Qu’est-ce qu’un package Python ? <a class="jp-toc-ignore"></a></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Packages_avancees.html">Maîtriser les outils scientifiques de Python : NumPy, Matplotlib, Numba, Scipy et SymPy. <a class="jp-toc-ignore"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Les%20classes.html">Les classes en Python</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpython de base.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/python de base.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Apprendre Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-et-types-de-donnees">1. Variables et Types de données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs">2. Opérateurs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structures-de-controle">3. Structures de contrôle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions">4. Fonctions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listes-et-chaines-de-caracteres">5. Listes et chaînes de caractères</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuer-l-apprentissage">Continuer l’apprentissage</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="apprendre-python">
+<h1>Apprendre Python<a class="headerlink" href="#apprendre-python" title="Link to this heading">#</a></h1>
+<p>Ce cours vous introduira aux bases de la programmation Python en utilisant Jupyter Notebook. L’avantage de Jupyter est qu’il permet d’exécuter du code étape par étape et de visualiser les résultats immédiatement, ce qui est idéal pour l’apprentissage.</p>
+<p><strong>Important:</strong> Nous n’utiliserons pas de packages externes pour ce cours, afin de nous concentrer sur les fonctionnalités de base de Python.</p>
+<section id="variables-et-types-de-donnees">
+<h2>1. Variables et Types de données<a class="headerlink" href="#variables-et-types-de-donnees" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Variables:</strong></p></li>
+<li><p>Une variable est un nom qui représente une valeur.</p></li>
+<li><p>Exemples:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">10</span></code> (x est une variable qui contient la valeur 10)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nom</span> <span class="pre">=</span> <span class="pre">&quot;John&quot;</span></code> (nom est une variable qui contient la chaîne de caractères “John”)</p></li>
+<li><p><strong>Types de données:</strong></p></li>
+<li><p><strong>Entiers (int):</strong> Nombres entiers comme 1, 2, 3, etc.</p></li>
+<li><p><strong>Flottants (float):</strong> Nombres décimaux comme 1.2, 3.14, etc.</p></li>
+<li><p><strong>Chaînes de caractères (str):</strong> Texte entre guillemets simples ou doubles, comme “Bonjour”</p></li>
+<li><p><strong>Booléens (bool):</strong> Valeurs True ou False</p></li>
+</ul>
+<p><strong>Exercice:</strong></p>
+<ol class="arabic simple">
+<li><p>Créez une variable appelée <code class="docutils literal notranslate"><span class="pre">age</span></code> et assignez-lui votre âge.</p></li>
+<li><p>Créez une variable appelée <code class="docutils literal notranslate"><span class="pre">nom</span></code> et assignez-lui votre nom.</p></li>
+<li><p>Affichez les valeurs des variables <code class="docutils literal notranslate"><span class="pre">age</span></code> et <code class="docutils literal notranslate"><span class="pre">nom</span></code> en utilisant la fonction <code class="docutils literal notranslate"><span class="pre">print()</span></code>.
+nées</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Votre code ici</span>
+<span class="n">age</span> <span class="o">=</span> 
+<span class="n">nom</span> <span class="o">=</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nom</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+    <span class="n">age</span> <span class="o">=</span>
+          <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="operateurs">
+<h2>2. Opérateurs<a class="headerlink" href="#operateurs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Opérateurs arithmétiques:</strong> +, -, *, /, // (division entière), % (modulo), ** (puissance)</p></li>
+<li><p><strong>Opérateurs de comparaison:</strong> == (égal à), != (différent de), &lt; (inférieur à), &gt; (supérieur à), &lt;= (inférieur ou égal à), &gt;= (supérieur ou égal à)</p></li>
+<li><p><strong>Opérateurs logiques:</strong> and, or, not</p></li>
+</ul>
+<p><strong>Exercice:</strong></p>
+<ol class="arabic simple">
+<li><p>Calculez la somme de deux variables <code class="docutils literal notranslate"><span class="pre">a</span></code> et <code class="docutils literal notranslate"><span class="pre">b</span></code> et stockez le résultat dans une variable <code class="docutils literal notranslate"><span class="pre">somme</span></code>.</p></li>
+<li><p>Vérifiez si la variable <code class="docutils literal notranslate"><span class="pre">age</span></code> est supérieure à 18 et affichez le résultat.</p></li>
+<li><p>Utilisez l’opérateur <code class="docutils literal notranslate"><span class="pre">not</span></code> pour inverser la valeur d’une variable booléenne <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Votre code ici</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">somme</span> <span class="o">=</span>
+
+<span class="c1"># Vérification de l&#39;âge</span>
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">18</span><span class="p">:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous êtes majeur.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous êtes mineur.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Inversion d&#39;une valeur booléenne</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="ow">not</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="structures-de-controle">
+<h2>3. Structures de contrôle<a class="headerlink" href="#structures-de-controle" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Conditions (if/else):</strong> Permettent d’exécuter du code en fonction de certaines conditions.</p></li>
+<li><p><strong>Boucles (for/while):</strong> Permettent de répéter un bloc de code plusieurs fois.</p></li>
+</ul>
+<p><strong>Exercice:</strong></p>
+<ol class="arabic simple">
+<li><p>Écrivez un programme qui demande à l’utilisateur de saisir un nombre et qui affiche si le nombre est pair ou impair.</p></li>
+<li><p>Utilisez une boucle <code class="docutils literal notranslate"><span class="pre">for</span></code> pour afficher les nombres de 1 à 10.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vérification pair/impair</span>
+<span class="n">nombre</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Entrez un nombre: &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">nombre</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le nombre est pair.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le nombre est impair.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Boucle for</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Le nombre est pair.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fonctions">
+<h2>4. Fonctions<a class="headerlink" href="#fonctions" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Fonctions:</strong> Blocs de code réutilisables qui effectuent une tâche spécifique.</p></li>
+</ul>
+<p><strong>Exercice:</strong></p>
+<ol class="arabic simple">
+<li><p>Créez une fonction appelée <code class="docutils literal notranslate"><span class="pre">carre(x)</span></code> qui prend un nombre en argument et qui retourne son carré.</p></li>
+<li><p>Appelez la fonction <code class="docutils literal notranslate"><span class="pre">carre()</span></code> avec différents nombres et affichez les résultats.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fonction carré</span>
+<span class="k">def</span> <span class="nf">carre</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="c1"># Appel de la fonction</span>
+<span class="n">resultat</span> <span class="o">=</span> <span class="n">carre</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resultat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="listes-et-chaines-de-caracteres">
+<h2>5. Listes et chaînes de caractères<a class="headerlink" href="#listes-et-chaines-de-caracteres" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Listes:</strong> Collections ordonnées d’éléments.</p></li>
+<li><p><strong>Chaînes de caractères:</strong> Séquences de caractères.</p></li>
+</ul>
+<p><strong>Exercice:</strong></p>
+<ol class="arabic simple">
+<li><p>Créez une liste <code class="docutils literal notranslate"><span class="pre">nombres</span></code> contenant les nombres de 1 à 5.</p></li>
+<li><p>Affichez le premier élément de la liste.</p></li>
+<li><p>Utilisez une boucle <code class="docutils literal notranslate"><span class="pre">for</span></code> pour parcourir la liste et afficher chaque élément.</p></li>
+<li><p>Inversez la chaîne de caractères “Bonjour” et affichez le résultat.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Liste de nombres</span>
+<span class="n">nombres</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nombres</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Parcourir la liste</span>
+<span class="k">for</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">nombres</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+
+<span class="c1"># Inverser une chaîne de caractères</span>
+<span class="n">texte</span> <span class="o">=</span> <span class="s2">&quot;Bonjour&quot;</span>
+<span class="n">texte_inverse</span> <span class="o">=</span> <span class="n">texte</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">texte_inverse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+1
+2
+3
+4
+5
+ruojnoB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="continuer-l-apprentissage">
+<h2>Continuer l’apprentissage<a class="headerlink" href="#continuer-l-apprentissage" title="Link to this heading">#</a></h2>
+<p>Ce cours n’est qu’une introduction aux classes en Python. Pour approfondir vos connaissances et découvrir toute la puissance de la programmation orientée objet, voici quelques pistes</p>
+<ul class="simple">
+<li><p><strong>Fichier “Packages.ipynb” :</strong> Si vous êtes intéressé par le calcul scientifique, l’analyse de données et la visualisation, ce fichier vous présentera des packages Python populaires tels que NumPy, SciPy, Pandas et Matplotlib. Vous apprendrez à manipuler des données, effectuer des analyses complexes et créer des visualisations convaincantes.</p></li>
+<li><p><strong>Fichier “Packages_avancees.ipynb” :</strong> Python offre un vaste écosystème de packages pour divers domaines. Ce fichier vous permettra de découvrir d’autres packages populaires tels que ceux pour le développement web, l’apprentissage automatique, le traitement d’images, etc. Vous pourrez ainsi explorer les nombreuses possibilités qu’offre Python et trouver les outils adaptés à vos projets.:</p></li>
+<li><p><strong>Fichier “Les <a class="reference external" href="http://classes.py">classes.py</a>” :</strong> Explorez des concepts plus avancés tels que les classes abstraites, les propriétés, les méthodes de classe et statiques, et les métaclasses. Ce fichier vous permettra d’approfondir vos compétences en POO et de créer des structures de code plus robustes et flexible.</p></li>
+</ul>
+<p><strong>Ressources supplémentaires :</strong></p>
+<ul class="simple">
+<li><p><strong>Documentation officielle de Python :</strong> La documentation officielle est une ressource précieuse pour obtenir des informations détaillées sur la syntaxe, les modules et les fonctionnalités de Python.</p></li>
+<li><p><strong>Tutoriels et cours en ligne :</strong> De nombreux tutoriels et cours en ligne, gratuits ou payants, sont disponibles pour approfondir vos connaissances en Python et en POO.</p></li>
+<li><p><strong>Communauté Python :</strong> Rejoignez la communauté Python active et engageante pour poser des questions, partager vos expériences et apprendre des autres développeurs.</p></li>
+</ul>
+<p><strong>En explorant ces ressources et en pratiquant régulièrement, vous deviendrez un expert en programmation Python et en POO, prêt à relever n’importe quel défi de programmation.</strong></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Packages.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Qu’est-ce qu’un package Python ? <a class="jp-toc-ignore"></a></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-et-types-de-donnees">1. Variables et Types de données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operateurs">2. Opérateurs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structures-de-controle">3. Structures de contrôle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions">4. Fonctions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listes-et-chaines-de-caracteres">5. Listes et chaînes de caractères</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuer-l-apprentissage">Continuer l’apprentissage</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
